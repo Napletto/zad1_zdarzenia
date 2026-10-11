@@ -1,7 +1,8 @@
 package com.example.a11_10;
 
-
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,17 +18,28 @@ public class MainActivity extends AppCompatActivity {
 
         tvTitle = findViewById(R.id.tvTitle);
 
-        findViewById(R.id.btn1).setOnClickListener(v -> dodajCyfre("1"));
-        findViewById(R.id.btn2).setOnClickListener(v -> dodajCyfre("2"));
-        findViewById(R.id.btn3).setOnClickListener(v -> dodajCyfre("3"));
-    }
+        View.OnClickListener wspolnyListener = v -> {
+            Button button = (Button) v;
+            String cyfra = button.getText().toString();
 
-    private void dodajCyfre(String cyfra) {
-        if (tvTitle.getText().toString().equals("0")) {
-            tvTitle.setText(cyfra);
-        } else {
-            tvTitle.append(cyfra);
+            if (tvTitle.getText().toString().equals("0")) {
+                tvTitle.setText(cyfra);
+            } else {
+                tvTitle.append(cyfra);
+            }
+        };
+
+        int[] przyciski = {
+                R.id.btn0, R.id.btn1, R.id.btn2,
+                R.id.btn3, R.id.btn4, R.id.btn5,
+                R.id.btn6, R.id.btn7, R.id.btn8,
+                R.id.btn9
+        };
+
+        for (int id : przyciski) {
+            findViewById(id).setOnClickListener(wspolnyListener);
         }
     }
 }
+
 
